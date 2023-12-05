@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:viewmodel="clr-namespace:DXMauiApp.ViewModels"
+             xmlns:components="clr-namespace:DXMauiApp.Components"
+             x:Class="DXMauiApp.Components.Cars">
+
+    <ContentView.Resources>
+        <components:BoolToColorConverter x:Key="boolToColorConverter" TrueSource="White" FalseSource="#90FFFFFF"/>
+    </ContentView.Resources>
+    
+    <ContentView.BindingContext>
+        <viewmodel:CarsViewModel />
+    </ContentView.BindingContext>
+
+    <dxco:TabView ItemsSource="{Binding CarsByBrand}"
+                  SelectedItemIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                  ItemHeaderMinWidth="90"
+                  ItemHeaderMaxWidth="360"
+                  HeaderPanelBackgroundColor="#1e88e5"
+                  HeaderPanelShadowHeight="3"
+                  HeaderPanelShadowRadius="3"
+                  IsSelectedItemIndicatorVisible="True"
+                  SelectedItemIndicatorColor="White">
+        <dxco:TabView.ItemHeaderTemplate>
+            <DataTemplate>
+                <AbsoluteLayout>
+                    <Label Text="{Binding Title}"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           HorizontalTextAlignment="Center"
+                           Padding="5,0"
+                           TextColor="{Binding IsSelected, Converter={StaticResource boolToColorConverter}}" />
+                </AbsoluteLayout>
+            </DataTemplate>
+        </dxco:TabView.ItemHeaderTemplate>
+        <dxco:TabView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <ListView ItemsSource="{Binding FilteredList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Padding="5" Text="{Binding FullName}"/>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+        </dxco:TabView.ItemTemplate>
+    </dxco:TabView>
+
+</ContentView>

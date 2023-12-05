@@ -1,99 +1,54 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
-             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
-             xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
-             xmlns:viewmodel="clr-namespace:DXMauiApp.ViewModels"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:components="clr-namespace:DXMauiApp.Components"
              ios:Page.UseSafeArea="true"
              x:Class= "DXMauiApp.MainPage">
-    <ContentPage.BindingContext>
-        <viewmodel:EmployeeDataViewModel />
-    </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="columnchooser" Clicked="ShowColumnChooserClick"/>
-    </ContentPage.ToolbarItems>
-    <Grid>
-        <dxg:DataGridView x:Name="dataGrid" 
-                          ItemsSource="{Binding Employees}"
-                  EditorShowMode="DoubleTap"
-                  AllowDragDropRows="True"
-                  CustomUnboundData="DataGridView_CustomUnboundData">
-            <dxg:DataGridView.GroupSummaries>
-                <dxg:GridColumnSummary FieldName="Access" 
-                               Type="Count" />
-            </dxg:DataGridView.GroupSummaries>
-            <dxg:DataGridView.Columns>
-                <dxg:ImageColumn FieldName="Photo" 
-                         Width="100"/>
-                <dxg:TemplateColumn FieldName="Name" 
-                            Caption="Employee" 
-                            MinWidth="200">
-                    <dxg:TemplateColumn.DisplayTemplate>
-                        <DataTemplate>
-                            <Grid VerticalOptions="Center" 
-                          Padding="15, 0, 0, 0" 
-                          RowDefinitions="Auto, Auto, Auto">
-                                <Label Text="{Binding Item.Name}" 
-                               FontSize="18" 
-                               FontAttributes="Bold"
-                               TextColor="{DynamicResource GridCellFontColor}" 
-                               Grid.Row="0" />
-                                <Label Text="{Binding Item.Position, StringFormat = 'Job Title: {0}'}"
-                               FontSize="Small" 
-                               TextColor="{DynamicResource GridCellFontColor}" 
-                               Grid.Row="1"/>
-                                <Label Text="{Binding Item.HireDate, StringFormat = 'Hire Date: {0:d}'}"
-                               FontSize="Small" 
-                               TextColor="{DynamicResource GridCellFontColor}" 
-                               Grid.Row="2" />
-                            </Grid>
-                        </DataTemplate>
-                    </dxg:TemplateColumn.DisplayTemplate>
-                </dxg:TemplateColumn>
-                <dxg:TextColumn FieldName="Phone" 
-                        MinWidth="130" 
-                        VerticalContentAlignment="Center" />
-                <dxg:TextColumn FieldName="Address" 
-                        MinWidth="150" 
-                        VerticalContentAlignment="Center" />
-                <dxg:DateColumn FieldName="BirthDate" 
-                        MinWidth="120" 
-                        DisplayFormat="d" 
-                        VerticalContentAlignment="Center"/>
-                <dxg:ComboBoxColumn FieldName="Access" 
-                            Caption="Access Level"
-                            IsGrouped="True"
-                            GroupInterval="Value"
-                            MinWidth="140" 
-                            VerticalContentAlignment="Center" />
-                <dxg:CheckBoxColumn FieldName="OnVacation" 
-                            MinWidth="130"
-                            VerticalContentAlignment="Center"/>
-                <dxg:NumberColumn FieldName="Age" 
-                          UnboundType="Integer" 
-                          MinWidth="120"
-                          VerticalContentAlignment="Center" 
-                          HorizontalContentAlignment="Center" />
-            </dxg:DataGridView.Columns>
-        </dxg:DataGridView>
-        <dxco:DXPopup x:Name="columnChooserPopup" BackgroundColor="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}"  HorizontalOptions="Fill" Margin="30,0,30,0" CornerRadius="6">
-            <dxcv:DXCollectionView Margin="20"
-                    ItemSpacing="4"
-                    ItemsSource="{Binding Source={Reference dataGrid}, Path=Columns}"
-                    HorizontalOptions="Fill"
-                    ReduceSizeToContent="true">
-                <dxcv:DXCollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Border Background="{AppThemeBinding Light={StaticResource Popup_Background_Light}, Dark={StaticResource Popup_Background_Dark}}" HeightRequest="56">
-                                <dxe:CheckEdit IsChecked="{Binding IsVisible}" Label="{Binding ActualCaption}" CheckBoxPosition="End" Margin="16,8,10,8"/>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </dxcv:DXCollectionView.ItemTemplate>
-            </dxcv:DXCollectionView>
-        </dxco:DXPopup>
-    </Grid>
+
+    <dxco:TabView HeaderPanelPosition="Bottom"
+                  SelectedItemIndicatorColor="{StaticResource Primary}"
+                  ItemHeaderWidth="*"
+                  ItemHeaderIconColor="{StaticResource TabItem}"
+                  ItemHeaderTextColor="{StaticResource TabItem}" 
+                  SelectedItemHeaderIconColor="{StaticResource Primary}"
+                  SelectedItemHeaderTextColor="{StaticResource Primary}" >
+
+        <!--<dxco:TabViewItem HeaderText="Mail"
+                     HeaderIcon="email.svg">
+            <dxco:TabViewItem.Content>
+                <Grid>
+                    <Label Text="Mail List Here" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>-->
+
+        <dxco:TabViewItem HeaderText="Calendar"
+                     HeaderIcon="calendar.svg">
+            <dxco:TabViewItem.Content>
+                <Grid>
+                    <Label Text="Calendar Here" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+
+        <dxco:TabViewItem HeaderText="People"
+                     HeaderIcon="people.svg">
+            <dxco:TabViewItem.Content>
+                <components:DataGridContent />
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+
+        <dxco:TabViewItem HeaderText="Cars" >
+            <dxco:TabViewItem.Content>
+                <components:Cars />
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+        
+    </dxco:TabView>
+
 </ContentPage>

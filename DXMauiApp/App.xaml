@@ -14,6 +14,7 @@
             <Color x:Key="NormalHeaderText">#404144</Color>
             <Color x:Key="NormalLightText">#959aa0</Color>
             <Color x:Key="DrawerTitleTextColor">White</Color>
+            <Color x:Key="TabItem">#757575</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}"/>
                 <Setter Property="BarTextColor" Value="{StaticResource DrawerTitleTextColor}"/>
