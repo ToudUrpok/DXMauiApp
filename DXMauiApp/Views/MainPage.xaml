@@ -12,7 +12,12 @@
     <Shell.TitleView>
         <views:TitleViewFix>
             <Grid Padding="0" Margin="0" ColumnDefinitions="*,Auto,Auto">
-                <Label Grid.Column="0" VerticalOptions="Center" Text="Blogs" FontSize="20" Style="{OnPlatform iOS={StaticResource TitleColors_iOS_Label}, Android={StaticResource TitleColors_Android_Label}}" TextColor="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource White}}"/>
+                <Label Grid.Column="0"
+                       VerticalOptions="Center"
+                       Text="DX"
+                       FontSize="20"
+                       Style="{OnPlatform iOS={StaticResource TitleColors_iOS_Label}, Android={StaticResource TitleColors_Android_Label}}" 
+                       TextColor="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource White}}"/>
                 <Image Grid.Column="1" WidthRequest="24" HeightRequest="24">
                     <Image.Source>
                         <MultiBinding StringFormat="{}{0}PublicEndpoint/AuthorImage/{1}">
@@ -65,7 +70,7 @@
             </dxco:TabViewItem.Content>
         </dxco:TabViewItem>-->
 
-        <dxco:TabViewItem HeaderText="People"
+        <dxco:TabViewItem HeaderText="Posts"
                           HeaderIcon="email.svg">
             <dxco:TabViewItem.Content>
                 <views:Posts />
