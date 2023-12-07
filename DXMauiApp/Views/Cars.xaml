@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:viewmodel="clr-namespace:DXMauiApp.ViewModels"
-             xmlns:components="clr-namespace:DXMauiApp.Components"
-             x:Class="DXMauiApp.Components.Cars">
+             xmlns:views="clr-namespace:DXMauiApp.Views"
+             x:Class="DXMauiApp.Views.Cars">
 
     <ContentView.Resources>
-        <components:BoolToColorConverter x:Key="boolToColorConverter" TrueSource="White" FalseSource="#90FFFFFF"/>
+        <views:BoolToColorConverter x:Key="boolToColorConverter" TrueSource="White" FalseSource="#90FFFFFF"/>
     </ContentView.Resources>
     
     <ContentView.BindingContext>

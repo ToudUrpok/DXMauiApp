@@ -1,0 +1,90 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:views="clr-namespace:DXMauiApp.Views"
+             xmlns:services="clr-namespace:DXMauiApp.Services"
+             xmlns:viewmodels="clr-namespace:DXMauiApp.ViewModels"
+             Style="{OnPlatform iOS={StaticResource ShellStyleiOS}, Android={StaticResource ShellStyle}}"
+             x:Class= "DXMauiApp.Views.MainPage">
+
+    <Shell.TitleView>
+        <views:TitleViewFix>
+            <Grid Padding="0" Margin="0" ColumnDefinitions="*,Auto,Auto">
+                <Label Grid.Column="0" VerticalOptions="Center" Text="Blogs" FontSize="20" Style="{OnPlatform iOS={StaticResource TitleColors_iOS_Label}, Android={StaticResource TitleColors_Android_Label}}" TextColor="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource White}}"/>
+                <Image Grid.Column="1" WidthRequest="24" HeightRequest="24">
+                    <Image.Source>
+                        <MultiBinding StringFormat="{}{0}PublicEndpoint/AuthorImage/{1}">
+                            <Binding Source="{x:Static services:WebAPIService.ApiUrl}"/>
+                            <Binding Path="CurrentUser.ID"/>
+                        </MultiBinding>
+                    </Image.Source>
+                    <Image.Clip>
+                        <EllipseGeometry RadiusX="12" RadiusY="12" Center="12,12" />
+                    </Image.Clip>
+                </Image>
+                <dxco:SimpleButton Padding="0" Grid.Column="2" Command="{Binding LogoutCommand}" Margin="10,0,0,0" Style="{OnPlatform iOS={StaticResource TitleColors_iOS_Button}, Android={StaticResource TitleColors_Android_Button}}" >
+                    <Image Source="logout" WidthRequest="32" HeightRequest="16" />
+                </dxco:SimpleButton>
+            </Grid>
+        </views:TitleViewFix>
+    </Shell.TitleView>
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <dxco:TabView HeaderPanelPosition="Bottom"
+                  SelectedItemIndicatorColor="{StaticResource Primary}"
+                  ItemHeaderWidth="*"
+                  ItemHeaderIconColor="{StaticResource TabItem}"
+                  ItemHeaderTextColor="{StaticResource TabItem}" 
+                  SelectedItemHeaderIconColor="{StaticResource Primary}"
+                  SelectedItemHeaderTextColor="{StaticResource Primary}" >
+
+        <!--<dxco:TabViewItem HeaderText="Mail"
+                     HeaderIcon="email.svg">
+            <dxco:TabViewItem.Content>
+                <Grid>
+                    <Label Text="Mail List Here" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>-->
+
+        <!--<dxco:TabViewItem HeaderText="Calendar"
+                     HeaderIcon="calendar.svg">
+            <dxco:TabViewItem.Content>
+                <Grid>
+                    <Label Text="Calendar Here" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>-->
+
+        <dxco:TabViewItem HeaderText="People"
+                          HeaderIcon="email.svg">
+            <dxco:TabViewItem.Content>
+                <views:Posts />
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+
+        <dxco:TabViewItem HeaderText="People"
+                          HeaderIcon="people.svg">
+            <dxco:TabViewItem.Content>
+                <views:DataGridContent />
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+
+        <dxco:TabViewItem HeaderText="Cars" >
+            <dxco:TabViewItem.Content>
+                <views:Cars />
+            </dxco:TabViewItem.Content>
+        </dxco:TabViewItem>
+        
+    </dxco:TabView>
+
+</ContentPage>

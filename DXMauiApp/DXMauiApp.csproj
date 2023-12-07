@@ -39,9 +39,16 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\columnchooser.svg" />
+	  <None Remove="Resources\Images\delete.svg" />
+	  <None Remove="Resources\Images\editorsname.svg" />
+	  <None Remove="Resources\Images\editorspassword.svg" />
 	  <None Remove="Resources\Images\email.svg" />
+	  <None Remove="Resources\Images\loginbackground.png" />
+	  <None Remove="Resources\Images\loginbackground_black.png" />
+	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\people.svg" />
 	</ItemGroup>
 
@@ -59,10 +66,23 @@
 
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\Cars.xaml">
+	  <Compile Update="Views\Posts.xaml.cs">
+	    <DependentUpon>Posts.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Cars.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\DataGridContent.xaml">
+	  <MauiXaml Update="Views\DataGridContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Posts.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

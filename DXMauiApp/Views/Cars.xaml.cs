@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace DXMauiApp.Components;
+namespace DXMauiApp.Views;
 
 public partial class Cars : ContentView
 {

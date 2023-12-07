@@ -18,9 +18,11 @@ namespace DXMauiApp
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("univia-pro-regular.ttf", "Univia-Pro");
-                    fonts.AddFont("roboto-bold.ttf", "Roboto-Bold");
                     fonts.AddFont("roboto-regular.ttf", "Roboto");
+                    fonts.AddFont("roboto-medium.ttf", "Roboto-Medium");
+                    fonts.AddFont("roboto-bold.ttf", "Roboto-Bold");
+                    fonts.AddFont("univia-pro-regular.ttf", "Univia-Pro");
+                    fonts.AddFont("univia-pro-medium.ttf", "Univia-Pro Medium");
                 });
 
             return builder.Build();

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxc="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:data="clr-namespace:DXMauiApp.Data"
+             xmlns:views="clr-namespace:DXMauiApp.Views"
+             xmlns:services="clr-namespace:DXMauiApp.Services"
+             xmlns:viewmodels="clr-namespace:DXMauiApp.ViewModels"
+             x:DataType="{x:Type viewmodels:PostsViewModel}"
+             x:Class="DXMauiApp.Views.Posts" >
+
+    <ContentView.BindingContext>
+        <viewmodels:PostsViewModel/>
+    </ContentView.BindingContext>
+    
+    <Grid>
+        <dxcv:DXCollectionView x:Name="ItemsListView" BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Background_Dark}}" ItemsSource="{Binding Posts}">
+            <dxcv:DXCollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type data:Post}">
+                    <dxc:SimpleButton CornerRadius="0" Margin="12,6,12,6" Padding="10" HeightRequest="100" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}">
+                        <Grid ColumnDefinitions="150,Auto,5*,4*" RowDefinitions="*,Auto">
+                            <Image Grid.RowSpan="2" Margin="0,0,10,0" Aspect="AspectFill">
+                                <Image.Source>
+                                    <MultiBinding StringFormat="{}{0}PublicEndpoint/PostImage/{1}">
+                                        <Binding Source="{x:Static services:WebAPIService.ApiUrl}"/>
+                                        <Binding Path="PostId"/>
+                                    </MultiBinding>
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Title}" FontAttributes="Bold" MaxLines="2"/>
+                            <Image Grid.Row="1" Grid.Column="1" WidthRequest="32" HeightRequest="32" Aspect="AspectFill">
+                                <Image.Source>
+                                    <MultiBinding StringFormat="{}{0}PublicEndpoint/AuthorImage/{1}">
+                                        <Binding Source="{x:Static services:WebAPIService.ApiUrl}"/>
+                                        <Binding Path="Author.ID"/>
+                                    </MultiBinding>
+                                </Image.Source>
+                                <Image.Clip>
+                                    <EllipseGeometry RadiusX="16" RadiusY="16" Center="16,16" />
+                                </Image.Clip>
+                            </Image>
+                            <Label Text="{Binding Author.UserName}" Grid.Row="1" Grid.Column="2" VerticalOptions="Center" Margin="5,0,0,0"/>
+                            <dxc:SimpleButton Padding="4,0,4,0" 
+                                              IconColor="{StaticResource Gray500}" 
+                                              Icon="delete" Grid.Row="1" 
+                                              Grid.Column="3" 
+                                              HorizontalOptions="End" 
+                                              IsVisible="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:PostsViewModel}}, Path=CanDeletePosts}" 
+                                              Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:PostsViewModel}}, Path=DeletePostCommand}" 
+                                              CommandParameter="{Binding}" 
+                                              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Card_Background_Dark}}">
+                                <Image Source="delete" 
+                                       HeightRequest="20"/>
+                            </dxc:SimpleButton>
+                        </Grid>
+                    </dxc:SimpleButton>
+                </DataTemplate>
+            </dxcv:DXCollectionView.ItemTemplate>
+        </dxcv:DXCollectionView>
+    </Grid>
+    
+</ContentView>

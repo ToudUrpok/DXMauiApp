@@ -1,8 +1,7 @@
-using DevExpress.Maui.Controls;
 using DevExpress.Maui.DataGrid;
 using DXMauiApp.Data;
 
-namespace DXMauiApp.Components;
+namespace DXMauiApp.Views;
 
 public partial class DataGridContent : ContentView
 {

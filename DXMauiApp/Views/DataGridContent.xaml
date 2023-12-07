@@ -6,7 +6,7 @@
              xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:dxg="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
              xmlns:viewmodel="clr-namespace:DXMauiApp.ViewModels"
-             x:Class="DXMauiApp.Components.DataGridContent">
+             x:Class="DXMauiApp.Views.DataGridContent">
 
     <ContentView.BindingContext>
         <viewmodel:EmployeeDataViewModel />
